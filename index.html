@@ -57,12 +57,16 @@
     .tool-card:hover::before{opacity:1}
     .tool-card.green-card:hover{border-color:rgba(74,247,160,.4)}
     .tool-card.green-card::before{background:radial-gradient(circle at 50% 0%,rgba(74,247,160,.08),transparent 70%)}
+    .tool-card.amber-card:hover{border-color:rgba(247,192,106,.4)}
+    .tool-card.amber-card::before{background:radial-gradient(circle at 50% 0%,rgba(247,192,106,.08),transparent 70%)}
     .tool-icon{font-size:48px;margin-bottom:16px;display:block}
     .tool-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
     .tool-desc{font-size:12px;color:var(--muted);line-height:1.6}
     .tool-arrow{position:absolute;bottom:20px;right:20px;font-size:18px;color:var(--border);transition:color .2s}
     .tool-card:hover .tool-arrow{color:var(--accent)}
     .tool-card.green-card:hover .tool-arrow{color:var(--green)}
+    .tool-card.amber-card:hover .tool-arrow{color:var(--accent2)}
+    .tools-grid .tool-card:last-child:nth-child(odd){grid-column:1/-1}
 
     /* SHARED */
     .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;
@@ -123,13 +127,6 @@
     .drop-label strong{color:var(--text)}
     .file-name{margin-top:10px;font-size:12px;color:var(--accent2);display:none}
 
-    /* MATH TABS */
-    .math-tabs{display:flex;gap:8px;margin-bottom:20px}
-    .math-tab{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;
-      background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;
-      cursor:pointer;transition:all .2s;text-align:center}
-    .math-tab.active{border-color:var(--green);color:var(--green);background:rgba(74,247,160,.08)}
-
     /* MATH TEXTAREA */
     .math-textarea{width:100%;background:var(--bg);border:1px solid var(--border);
       border-radius:10px;padding:14px 16px;font-family:'DM Mono',monospace;
@@ -152,35 +149,66 @@
       text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px}
     .answer-text{font-size:13px;line-height:1.9;color:var(--text);white-space:pre-wrap;word-break:break-word}
 
-    /* MATH KEYBOARD */
-    .kb-toggle{display:flex;align-items:center;gap:8px;background:none;
-      border:1px solid var(--border);color:var(--muted);padding:7px 14px;
-      border-radius:8px;font-family:'DM Mono',monospace;font-size:11px;
+    /* MATH TABS */
+    .math-tabs{display:flex;gap:8px;margin-bottom:20px}
+    .math-tab{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px;
+      background:none;color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;
+      cursor:pointer;transition:all .2s;text-align:center}
+    .math-tab.active{border-color:var(--green);color:var(--green);background:rgba(74,247,160,.08)}
+
+    /* ── iOS-STYLE MATH KEYBOARD ── */
+    .kb-toggle{display:inline-flex;align-items:center;gap:8px;background:none;
+      border:1px solid var(--border);color:var(--muted);padding:8px 16px;
+      border-radius:8px;font-family:'DM Mono',monospace;font-size:12px;
       cursor:pointer;transition:all .2s;margin-top:10px}
     .kb-toggle:hover,.kb-toggle.open{border-color:var(--green);color:var(--green);background:rgba(74,247,160,.06)}
-    .math-keyboard{display:none;background:var(--surface);border:1px solid var(--border);
-      border-radius:14px;padding:16px;margin-top:10px;animation:slideIn .2s ease both}
-    .math-keyboard.open{display:block}
-    .kb-section{margin-bottom:12px}
-    .kb-section-label{font-size:9px;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;
-      margin-bottom:8px;padding-left:2px}
-    .kb-row{display:flex;flex-wrap:wrap;gap:6px}
-    .kb-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);
-      border-radius:8px;padding:8px 12px;font-family:'DM Mono',monospace;font-size:13px;
-      cursor:pointer;transition:all .15s;min-width:42px;text-align:center;line-height:1;user-select:none}
-    .kb-btn:hover{background:rgba(74,247,160,.1);border-color:var(--green);color:var(--green);transform:translateY(-1px)}
-    .kb-btn:active{transform:translateY(0);background:rgba(74,247,160,.2)}
-    .kb-btn.wide{min-width:70px}
-    .kb-btn.red{border-color:rgba(247,90,90,.3);color:var(--error)}
-    .kb-btn.red:hover{background:rgba(247,90,90,.1);border-color:var(--error)}
-    .kb-btn.accent{border-color:rgba(124,106,247,.3);color:var(--accent)}
-    .kb-btn.accent:hover{background:rgba(124,106,247,.1);border-color:var(--accent)}
 
-    /* BACKEND URL config box */
-    .config-note{background:rgba(124,106,247,.08);border:1px solid rgba(124,106,247,.2);
-      border-radius:10px;padding:14px 18px;font-size:12px;color:var(--muted);
-      margin-bottom:20px;line-height:1.7}
-    .config-note span{color:var(--accent)}
+    .ios-keyboard{display:none;margin-top:12px;border-radius:16px;overflow:hidden;
+      border:1px solid var(--border);background:var(--surface2);animation:slideIn .2s ease both}
+    .ios-keyboard.open{display:block}
+
+    /* Tab bar */
+    .kb-tabs{display:flex;background:var(--bg);border-bottom:1px solid var(--border)}
+    .kb-tab{flex:1;padding:10px 6px;font-size:11px;color:var(--muted);background:none;
+      border:none;cursor:pointer;font-family:'DM Mono',monospace;transition:all .2s;
+      border-bottom:2px solid transparent;letter-spacing:.05em}
+    .kb-tab.active{color:var(--green);border-bottom-color:var(--green);background:rgba(74,247,160,.04)}
+
+    /* Key grid */
+    .kb-grid{display:none;padding:10px;gap:6px;
+      grid-template-columns:repeat(9,1fr)}
+    .kb-grid.active{display:grid}
+    @media(max-width:600px){
+      .kb-grid{grid-template-columns:repeat(7,1fr)}
+    }
+
+    /* Individual keys */
+    .k{background:var(--surface);border:1px solid var(--border);color:var(--text);
+      border-radius:8px;padding:10px 4px;font-size:14px;font-family:'DM Mono',monospace;
+      cursor:pointer;transition:all .12s;text-align:center;line-height:1.2;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:44px;user-select:none;position:relative}
+    .k:hover{background:rgba(74,247,160,.12);border-color:var(--green);color:var(--green);transform:scale(1.05)}
+    .k:active{transform:scale(0.96);background:rgba(74,247,160,.25)}
+    .k.num{background:var(--surface2);font-size:16px;font-weight:600}
+    .k.op{color:var(--accent);border-color:rgba(124,106,247,.3);background:rgba(124,106,247,.06)}
+    .k.op:hover{background:rgba(124,106,247,.15);border-color:var(--accent);color:var(--accent)}
+    .k.fn{color:var(--accent2);border-color:rgba(247,192,106,.3);font-size:12px}
+    .k.fn:hover{background:rgba(247,192,106,.12);border-color:var(--accent2);color:var(--accent2)}
+    .k.action{color:var(--error);border-color:rgba(247,90,90,.3)}
+    .k.action:hover{background:rgba(247,90,90,.12);border-color:var(--error)}
+    .k.enter{background:var(--green);color:#000;border-color:var(--green);font-weight:700}
+    .k.enter:hover{background:#72ffbf}
+    .k .sub{font-size:8px;color:var(--muted);margin-top:2px;line-height:1}
+
+    /* CALCULATOR PAGE */
+    .calc-display{background:var(--bg);border:1px solid var(--green);border-radius:12px;
+      padding:20px;margin-bottom:12px;text-align:right;box-shadow:0 0 0 2px rgba(74,247,160,.1)}
+    .calc-expr{font-size:13px;color:var(--muted);min-height:20px;word-break:break-all}
+    .calc-result{font-size:28px;color:var(--text);font-weight:600;min-height:40px;word-break:break-all}
+    .calc-preview-line{font-size:14px;color:var(--green);min-height:22px}
+    .calc-history{max-height:100px;overflow-y:auto;margin-bottom:12px;font-size:12px;color:var(--muted)}
+    .calc-history div{padding:4px 0;border-bottom:1px solid var(--border)}
   </style>
 </head>
 <body>
@@ -190,12 +218,18 @@
   <div class="page active" id="homePage">
     <div class="badge">Student Tools · Free · No Login</div>
     <h1>Your <span>Study</span><br/>Toolkit</h1>
-    <p class="subtitle">Two powerful tools in one place — solve any maths problem with AI, or edit fields in your engineering PDF drawings.</p>
+    <p class="subtitle">Three powerful tools — solve maths with AI, use a scientific calculator, or edit fields in your engineering PDFs.</p>
     <div class="tools-grid">
       <div class="tool-card green-card" onclick="showPage('mathPage')">
         <span class="tool-icon">🧮</span>
         <div class="tool-title">Solve Maths</div>
-        <div class="tool-desc">Type a question or upload a photo. AI solves it step by step instantly.</div>
+        <div class="tool-desc">Type a question or upload a photo. AI solves it step by step.</div>
+        <span class="tool-arrow">→</span>
+      </div>
+      <div class="tool-card amber-card" onclick="showPage('calcPage')">
+        <span class="tool-icon">🔢</span>
+        <div class="tool-title">Calculator</div>
+        <div class="tool-desc">Scientific calculator with history. sin, cos, log, √ and more.</div>
         <span class="tool-arrow">→</span>
       </div>
       <div class="tool-card" onclick="showPage('pdfPage')">
@@ -207,12 +241,12 @@
     </div>
   </div>
 
-  <!-- ══════════════ MATHS PAGE ══════════════ -->
+  <!-- ══════════════ MATHS SOLVER PAGE ══════════════ -->
   <div class="page" id="mathPage">
     <button class="back-btn" onclick="showPage('homePage')">← Back</button>
     <div class="badge">Powered by AI</div>
     <h1>Solve <span style="color:var(--green)">Maths</span></h1>
-    <p class="subtitle">Type your question or upload a photo — get a full step-by-step solution instantly.</p>
+    <p class="subtitle">Type your question or upload a photo — get a full step-by-step solution.</p>
 
     <div class="card">
       <div class="math-tabs">
@@ -220,149 +254,200 @@
         <button class="math-tab"        id="tabImage" onclick="switchTab('image')">📷 &nbsp;Upload Image</button>
       </div>
 
-      <!-- TEXT TAB -->
+      <!-- TEXT INPUT -->
       <div id="textInput">
         <div class="card-title"><span class="num num-green">1</span> Your Question</div>
         <textarea class="math-textarea" id="mathQuestion"
-          placeholder="e.g.  2x² + 5x - 3 = 0&#10;or:  ∫ sin(x)cos(x) dx&#10;or:  A train travels at 60 km/h for 2 hours…"></textarea>
+          placeholder="e.g.  2x² + 5x - 3 = 0&#10;or:  ∫ sin(x) dx&#10;or:  A train travels 60 km/h for 2 hours…"></textarea>
 
-        <button class="kb-toggle" id="kbToggle" onclick="toggleKeyboard()">⌨️ &nbsp;Math Keyboard</button>
+        <!-- Keyboard toggle -->
+        <button class="kb-toggle" id="kbToggle" onclick="toggleKB()">⌨️ &nbsp;Math Keyboard</button>
 
-        <div class="math-keyboard" id="mathKeyboard">
-          <div class="kb-section">
-            <div class="kb-section-label">Basic</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('0')">0</button>
-              <button class="kb-btn" onclick="ins('1')">1</button>
-              <button class="kb-btn" onclick="ins('2')">2</button>
-              <button class="kb-btn" onclick="ins('3')">3</button>
-              <button class="kb-btn" onclick="ins('4')">4</button>
-              <button class="kb-btn" onclick="ins('5')">5</button>
-              <button class="kb-btn" onclick="ins('6')">6</button>
-              <button class="kb-btn" onclick="ins('7')">7</button>
-              <button class="kb-btn" onclick="ins('8')">8</button>
-              <button class="kb-btn" onclick="ins('9')">9</button>
-              <button class="kb-btn" onclick="ins('.')">.</button>
-              <button class="kb-btn" onclick="ins('(')">(</button>
-              <button class="kb-btn" onclick="ins(')')">)</button>
-            </div>
+        <!-- ── iOS-STYLE KEYBOARD ── -->
+        <div class="ios-keyboard" id="iosKB">
+          <!-- Tab bar -->
+          <div class="kb-tabs">
+            <button class="kb-tab active" onclick="switchKBTab('num')"  id="kbt-num">123</button>
+            <button class="kb-tab"        onclick="switchKBTab('func')" id="kbt-func">f(x)</button>
+            <button class="kb-tab"        onclick="switchKBTab('greek')" id="kbt-greek">αβγ</button>
+            <button class="kb-tab"        onclick="switchKBTab('calc')" id="kbt-calc">∫∑</button>
           </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Operators</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('+')">+</button>
-              <button class="kb-btn" onclick="ins('-')">−</button>
-              <button class="kb-btn" onclick="ins('×')">×</button>
-              <button class="kb-btn" onclick="ins('÷')">÷</button>
-              <button class="kb-btn" onclick="ins('/')"> / </button>
-              <button class="kb-btn" onclick="ins('=')">=</button>
-              <button class="kb-btn" onclick="ins('≠')">≠</button>
-              <button class="kb-btn" onclick="ins('<')">&lt;</button>
-              <button class="kb-btn" onclick="ins('>')">&gt;</button>
-              <button class="kb-btn" onclick="ins('≤')">≤</button>
-              <button class="kb-btn" onclick="ins('≥')">≥</button>
-              <button class="kb-btn" onclick="ins('±')">±</button>
-            </div>
+
+          <!-- 123 — Numbers & basic ops -->
+          <div class="kb-grid active" id="kbg-num">
+            <button class="k num" onclick="ins('x')">x</button>
+            <button class="k num" onclick="ins('y')">y</button>
+            <button class="k fn"  onclick="ins('π')">π</button>
+            <button class="k fn"  onclick="ins('e')">e</button>
+            <button class="k num" onclick="ins('7')">7</button>
+            <button class="k num" onclick="ins('8')">8</button>
+            <button class="k num" onclick="ins('9')">9</button>
+            <button class="k op"  onclick="ins('×')">×</button>
+            <button class="k op"  onclick="ins('÷')">÷</button>
+
+            <button class="k fn"  onclick="ins('^2')">x²<span class="sub">square</span></button>
+            <button class="k fn"  onclick="ins('^')">xⁿ<span class="sub">power</span></button>
+            <button class="k fn"  onclick="ins('√(')">√<span class="sub">root</span></button>
+            <button class="k fn"  onclick="ins('|  |')">|x|<span class="sub">abs</span></button>
+            <button class="k num" onclick="ins('4')">4</button>
+            <button class="k num" onclick="ins('5')">5</button>
+            <button class="k num" onclick="ins('6')">6</button>
+            <button class="k op"  onclick="ins('+')">+</button>
+            <button class="k op"  onclick="ins('-')">−</button>
+
+            <button class="k fn"  onclick="ins('<')">&#60;</button>
+            <button class="k fn"  onclick="ins('>')">&#62;</button>
+            <button class="k fn"  onclick="ins('≤')">≤</button>
+            <button class="k fn"  onclick="ins('≥')">≥</button>
+            <button class="k num" onclick="ins('1')">1</button>
+            <button class="k num" onclick="ins('2')">2</button>
+            <button class="k num" onclick="ins('3')">3</button>
+            <button class="k op"  onclick="ins('=')">=</button>
+            <button class="k fn"  onclick="ins('≠')">≠</button>
+
+            <button class="k fn"  onclick="ins('ans')">ans</button>
+            <button class="k fn"  onclick="ins(',')"> , </button>
+            <button class="k fn"  onclick="ins('(')">(</button>
+            <button class="k fn"  onclick="ins(')')">)</button>
+            <button class="k num" onclick="ins('0')">0</button>
+            <button class="k num" onclick="ins('.')">.</button>
+            <button class="k op"  onclick="ins('±')">±</button>
+            <button class="k action" onclick="kbBackspace()">⌫</button>
+            <button class="k enter"  onclick="ins('\n')">↵</button>
           </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Powers &amp; Roots</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('^2')">x²</button>
-              <button class="kb-btn" onclick="ins('^3')">x³</button>
-              <button class="kb-btn" onclick="ins('^')">xⁿ</button>
-              <button class="kb-btn" onclick="ins('√(')">√</button>
-              <button class="kb-btn" onclick="ins('∛(')">∛</button>
-              <button class="kb-btn" onclick="ins('1/')">1/x</button>
-              <button class="kb-btn" onclick="ins('|')">| |</button>
-              <button class="kb-btn" onclick="ins('%')">%</button>
-            </div>
+
+          <!-- f(x) — Functions -->
+          <div class="kb-grid" id="kbg-func">
+            <button class="k fn" onclick="ins('sin(')">sin</button>
+            <button class="k fn" onclick="ins('cos(')">cos</button>
+            <button class="k fn" onclick="ins('tan(')">tan</button>
+            <button class="k fn" onclick="ins('sin⁻¹(')">sin⁻¹</button>
+            <button class="k fn" onclick="ins('cos⁻¹(')">cos⁻¹</button>
+            <button class="k fn" onclick="ins('tan⁻¹(')">tan⁻¹</button>
+            <button class="k fn" onclick="ins('sinh(')">sinh</button>
+            <button class="k fn" onclick="ins('cosh(')">cosh</button>
+            <button class="k fn" onclick="ins('tanh(')">tanh</button>
+
+            <button class="k fn" onclick="ins('log(')">log</button>
+            <button class="k fn" onclick="ins('ln(')">ln</button>
+            <button class="k fn" onclick="ins('log₂(')">log₂</button>
+            <button class="k fn" onclick="ins('log₁₀(')">log₁₀</button>
+            <button class="k fn" onclick="ins('e^')">eˣ</button>
+            <button class="k fn" onclick="ins('10^')">10ˣ</button>
+            <button class="k fn" onclick="ins('√(')">√</button>
+            <button class="k fn" onclick="ins('∛(')">∛</button>
+            <button class="k fn" onclick="ins('^(1/')">ⁿ√</button>
+
+            <button class="k fn" onclick="ins('n!')">n!</button>
+            <button class="k fn" onclick="ins('nCr(')">nCr</button>
+            <button class="k fn" onclick="ins('nPr(')">nPr</button>
+            <button class="k fn" onclick="ins('|  |')">|x|</button>
+            <button class="k fn" onclick="ins('floor(')">⌊x⌋</button>
+            <button class="k fn" onclick="ins('ceil(')">⌈x⌉</button>
+            <button class="k fn" onclick="ins('%')">mod</button>
+            <button class="k fn" onclick="ins('gcd(')">gcd</button>
+            <button class="k fn" onclick="ins('lcm(')">lcm</button>
+
+            <button class="k fn" onclick="ins('(')">( </button>
+            <button class="k fn" onclick="ins(')')"> )</button>
+            <button class="k fn" onclick="ins('^2')">x²</button>
+            <button class="k fn" onclick="ins('^3')">x³</button>
+            <button class="k fn" onclick="ins('^')">xⁿ</button>
+            <button class="k fn" onclick="ins('1/')">1/x</button>
+            <button class="k fn" onclick="ins('∞')">∞</button>
+            <button class="k action" onclick="kbBackspace()">⌫</button>
+            <button class="k enter"  onclick="ins('\n')">↵</button>
           </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Algebra</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('x')">x</button>
-              <button class="kb-btn" onclick="ins('y')">y</button>
-              <button class="kb-btn" onclick="ins('z')">z</button>
-              <button class="kb-btn" onclick="ins('a')">a</button>
-              <button class="kb-btn" onclick="ins('b')">b</button>
-              <button class="kb-btn" onclick="ins('n')">n</button>
-              <button class="kb-btn" onclick="ins('∞')">∞</button>
-              <button class="kb-btn" onclick="ins('→')">→</button>
-            </div>
+
+          <!-- αβγ — Greek Letters -->
+          <div class="kb-grid" id="kbg-greek">
+            <button class="k fn" onclick="ins('α')">α</button>
+            <button class="k fn" onclick="ins('β')">β</button>
+            <button class="k fn" onclick="ins('γ')">γ</button>
+            <button class="k fn" onclick="ins('δ')">δ</button>
+            <button class="k fn" onclick="ins('ε')">ε</button>
+            <button class="k fn" onclick="ins('ζ')">ζ</button>
+            <button class="k fn" onclick="ins('η')">η</button>
+            <button class="k fn" onclick="ins('θ')">θ</button>
+            <button class="k fn" onclick="ins('ι')">ι</button>
+
+            <button class="k fn" onclick="ins('κ')">κ</button>
+            <button class="k fn" onclick="ins('λ')">λ</button>
+            <button class="k fn" onclick="ins('μ')">μ</button>
+            <button class="k fn" onclick="ins('ν')">ν</button>
+            <button class="k fn" onclick="ins('ξ')">ξ</button>
+            <button class="k fn" onclick="ins('π')">π</button>
+            <button class="k fn" onclick="ins('ρ')">ρ</button>
+            <button class="k fn" onclick="ins('σ')">σ</button>
+            <button class="k fn" onclick="ins('τ')">τ</button>
+
+            <button class="k fn" onclick="ins('υ')">υ</button>
+            <button class="k fn" onclick="ins('φ')">φ</button>
+            <button class="k fn" onclick="ins('χ')">χ</button>
+            <button class="k fn" onclick="ins('ψ')">ψ</button>
+            <button class="k fn" onclick="ins('ω')">ω</button>
+            <button class="k fn" onclick="ins('Δ')">Δ</button>
+            <button class="k fn" onclick="ins('Σ')">Σ</button>
+            <button class="k fn" onclick="ins('Π')">Π</button>
+            <button class="k fn" onclick="ins('Ω')">Ω</button>
+
+            <button class="k fn" onclick="ins('Γ')">Γ</button>
+            <button class="k fn" onclick="ins('Λ')">Λ</button>
+            <button class="k fn" onclick="ins('Φ')">Φ</button>
+            <button class="k fn" onclick="ins('Ψ')">Ψ</button>
+            <button class="k fn" onclick="ins('∞')">∞</button>
+            <button class="k fn" onclick="ins('→')">→</button>
+            <button class="k fn" onclick="ins('≈')">≈</button>
+            <button class="k action" onclick="kbBackspace()">⌫</button>
+            <button class="k enter"  onclick="ins('\n')">↵</button>
           </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Calculus</div>
-            <div class="kb-row">
-              <button class="kb-btn wide" onclick="ins('d/dx ')">d/dx</button>
-              <button class="kb-btn wide" onclick="ins('∫ ')">∫ (integral)</button>
-              <button class="kb-btn wide" onclick="ins('∂/∂x ')">∂/∂x</button>
-              <button class="kb-btn wide" onclick="ins('lim(x→0) ')">lim</button>
-              <button class="kb-btn wide" onclick="ins('Σ ')">Σ (sum)</button>
-              <button class="kb-btn wide" onclick="ins('Π ')">Π (product)</button>
-            </div>
-          </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Trigonometry</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('sin(')">sin</button>
-              <button class="kb-btn" onclick="ins('cos(')">cos</button>
-              <button class="kb-btn" onclick="ins('tan(')">tan</button>
-              <button class="kb-btn" onclick="ins('sin⁻¹(')">sin⁻¹</button>
-              <button class="kb-btn" onclick="ins('cos⁻¹(')">cos⁻¹</button>
-              <button class="kb-btn" onclick="ins('tan⁻¹(')">tan⁻¹</button>
-              <button class="kb-btn" onclick="ins('π')">π</button>
-              <button class="kb-btn" onclick="ins('°')">°</button>
-            </div>
-          </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Logarithms</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('log(')">log</button>
-              <button class="kb-btn" onclick="ins('ln(')">ln</button>
-              <button class="kb-btn" onclick="ins('log₂(')">log₂</button>
-              <button class="kb-btn" onclick="ins('e^')">eˣ</button>
-              <button class="kb-btn" onclick="ins('e')">e</button>
-            </div>
-          </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Greek Letters</div>
-            <div class="kb-row">
-              <button class="kb-btn" onclick="ins('α')">α</button>
-              <button class="kb-btn" onclick="ins('β')">β</button>
-              <button class="kb-btn" onclick="ins('γ')">γ</button>
-              <button class="kb-btn" onclick="ins('δ')">δ</button>
-              <button class="kb-btn" onclick="ins('θ')">θ</button>
-              <button class="kb-btn" onclick="ins('λ')">λ</button>
-              <button class="kb-btn" onclick="ins('μ')">μ</button>
-              <button class="kb-btn" onclick="ins('σ')">σ</button>
-              <button class="kb-btn" onclick="ins('φ')">φ</button>
-              <button class="kb-btn" onclick="ins('ω')">ω</button>
-              <button class="kb-btn" onclick="ins('Δ')">Δ</button>
-              <button class="kb-btn" onclick="ins('Ω')">Ω</button>
-            </div>
-          </div>
-          <div class="kb-section">
-            <div class="kb-section-label">Matrices</div>
-            <div class="kb-row">
-              <button class="kb-btn wide" onclick="ins('[a b; c d]')">[matrix]</button>
-              <button class="kb-btn wide" onclick="ins('det(')">det</button>
-              <button class="kb-btn wide" onclick="ins('transpose(')">transpose</button>
-              <button class="kb-btn" onclick="ins('·')">· dot</button>
-              <button class="kb-btn" onclick="ins('×')">× cross</button>
-            </div>
-          </div>
-          <div class="kb-section" style="margin-bottom:0">
-            <div class="kb-row">
-              <button class="kb-btn wide accent" onclick="ins('\n')">↵ New Line</button>
-              <button class="kb-btn wide accent" onclick="ins('   ')">Space</button>
-              <button class="kb-btn wide red"    onclick="backspace()">⌫ Delete</button>
-              <button class="kb-btn wide red"    onclick="clearAll()">✕ Clear All</button>
-            </div>
+
+          <!-- ∫∑ — Calculus & Advanced -->
+          <div class="kb-grid" id="kbg-calc">
+            <button class="k fn" onclick="ins('∫ ')">∫</button>
+            <button class="k fn" onclick="ins('∮ ')">∮</button>
+            <button class="k fn" onclick="ins('∬ ')">∬</button>
+            <button class="k fn" onclick="ins('∭ ')">∭</button>
+            <button class="k fn" onclick="ins('d/dx ')">d/dx</button>
+            <button class="k fn" onclick="ins('∂/∂x ')">∂/∂x</button>
+            <button class="k fn" onclick="ins('d²/dx² ')">d²/dx²</button>
+            <button class="k fn" onclick="ins('∇')">∇</button>
+            <button class="k fn" onclick="ins('∇²')">∇²</button>
+
+            <button class="k fn" onclick="ins('Σ ')">Σ</button>
+            <button class="k fn" onclick="ins('Π ')">Π</button>
+            <button class="k fn" onclick="ins('lim(x→0) ')">lim</button>
+            <button class="k fn" onclick="ins('lim(x→∞) ')">lim∞</button>
+            <button class="k fn" onclick="ins('→')">→</button>
+            <button class="k fn" onclick="ins('±')">±</button>
+            <button class="k fn" onclick="ins('∝')">∝</button>
+            <button class="k fn" onclick="ins('∴')">∴</button>
+            <button class="k fn" onclick="ins('∵')">∵</button>
+
+            <button class="k fn" onclick="ins('[a b; c d]')">[ ]<span class="sub">matrix</span></button>
+            <button class="k fn" onclick="ins('det(')">det</button>
+            <button class="k fn" onclick="ins('tr(')">tr</button>
+            <button class="k fn" onclick="ins('·')">·</button>
+            <button class="k fn" onclick="ins('×')">×</button>
+            <button class="k fn" onclick="ins('⊗')">⊗</button>
+            <button class="k fn" onclick="ins('∈')">∈</button>
+            <button class="k fn" onclick="ins('∉')">∉</button>
+            <button class="k fn" onclick="ins('⊂')">⊂</button>
+
+            <button class="k fn" onclick="ins('∪')">∪</button>
+            <button class="k fn" onclick="ins('∩')">∩</button>
+            <button class="k fn" onclick="ins('∅')">∅</button>
+            <button class="k fn" onclick="ins('ℝ')">ℝ</button>
+            <button class="k fn" onclick="ins('ℤ')">ℤ</button>
+            <button class="k fn" onclick="ins('ℕ')">ℕ</button>
+            <button class="k fn" onclick="ins('ℂ')">ℂ</button>
+            <button class="k action" onclick="kbBackspace()">⌫</button>
+            <button class="k enter"  onclick="ins('\n')">↵</button>
           </div>
         </div>
       </div>
 
-      <!-- IMAGE TAB -->
+      <!-- IMAGE INPUT -->
       <div id="imageInput" style="display:none">
         <div class="card-title"><span class="num num-green">1</span> Upload Problem Image</div>
         <div class="img-drop" id="imgDrop">
@@ -376,21 +461,163 @@
       <button class="btn btn-green" id="solveBtn">🧮 &nbsp;Solve Now</button>
     </div>
 
-    <div class="loader" id="mathLoader">
-      <div class="spinner green"></div>
-      Solving your problem…
-    </div>
-
+    <div class="loader" id="mathLoader"><div class="spinner green"></div>Solving your problem…</div>
     <div class="answer-box" id="answerBox">
       <div class="answer-label">Step-by-step Solution</div>
       <div class="answer-text" id="answerText"></div>
     </div>
   </div>
 
+  <!-- ══════════════ CALCULATOR PAGE ══════════════ -->
+  <div class="page" id="calcPage">
+    <button class="back-btn" onclick="showPage('homePage')">← Back</button>
+    <div class="badge">Scientific Calculator</div>
+    <h1>Calcu<span style="color:var(--accent2)">lator</span></h1>
+    <p class="subtitle">Scientific calculator with live preview and history.</p>
+
+    <div class="card">
+      <!-- History -->
+      <div class="calc-history" id="calcHistory"></div>
+
+      <!-- Display -->
+      <div class="calc-display">
+        <div class="calc-expr"    id="calcExpr"></div>
+        <div class="calc-result"  id="calcResult">0</div>
+        <div class="calc-preview-line" id="calcPreviewLine"></div>
+      </div>
+
+      <!-- iOS keyboard directly shown for calculator -->
+      <div class="ios-keyboard open" id="calcIOSKB" style="margin-top:0">
+        <div class="kb-tabs">
+          <button class="kb-tab active" onclick="switchCalcTab('num')"  id="ckt-num">123</button>
+          <button class="kb-tab"        onclick="switchCalcTab('sci')"  id="ckt-sci">f(x)</button>
+          <button class="kb-tab"        onclick="switchCalcTab('const')" id="ckt-const">π e</button>
+        </div>
+
+        <!-- Numbers -->
+        <div class="kb-grid active" id="ckg-num">
+          <button class="k num" onclick="cadd('7')">7</button>
+          <button class="k num" onclick="cadd('8')">8</button>
+          <button class="k num" onclick="cadd('9')">9</button>
+          <button class="k op"  onclick="cadd('/')">÷</button>
+          <button class="k fn"  onclick="cadd('**2')">x²</button>
+          <button class="k fn"  onclick="cadd('**')">xⁿ</button>
+          <button class="k fn"  onclick="cadd('Math.sqrt(')">√</button>
+          <button class="k action" onclick="calcBackspace()">⌫</button>
+          <button class="k action" onclick="calcClear()">AC</button>
+
+          <button class="k num" onclick="cadd('4')">4</button>
+          <button class="k num" onclick="cadd('5')">5</button>
+          <button class="k num" onclick="cadd('6')">6</button>
+          <button class="k op"  onclick="cadd('*')">×</button>
+          <button class="k fn"  onclick="cadd('(')"> ( </button>
+          <button class="k fn"  onclick="cadd(')')"> ) </button>
+          <button class="k fn"  onclick="cadd('%')">%</button>
+          <button class="k fn"  onclick="cadd('Math.abs(')">|x|</button>
+          <button class="k fn"  onclick="cadd('1/')">1/x</button>
+
+          <button class="k num" onclick="cadd('1')">1</button>
+          <button class="k num" onclick="cadd('2')">2</button>
+          <button class="k num" onclick="cadd('3')">3</button>
+          <button class="k op"  onclick="cadd('-')">−</button>
+          <button class="k fn"  onclick="cadd('Math.PI')">π</button>
+          <button class="k fn"  onclick="cadd('Math.E')">e</button>
+          <button class="k fn"  onclick="toggleCalcDeg()" id="degBtn">DEG</button>
+          <button class="k op"  onclick="cadd('+')">+</button>
+          <button class="k enter" onclick="calculate()">=</button>
+
+          <button class="k num" style="grid-column:span 2" onclick="cadd('0')">0</button>
+          <button class="k num" onclick="cadd('.')">.</button>
+          <button class="k op"  onclick="cadd('+/-')" >±</button>
+          <button class="k fn"  onclick="calcAns()">ANS</button>
+          <button class="k fn"  onclick="cadd('Math.log10(')">log</button>
+          <button class="k fn"  onclick="cadd('Math.log(')">ln</button>
+          <button class="k fn"  onclick="cadd('Math.floor(')">⌊⌋</button>
+          <button class="k enter" onclick="calculate()">=</button>
+        </div>
+
+        <!-- Scientific -->
+        <div class="kb-grid" id="ckg-sci">
+          <button class="k fn" onclick="cadd('Math.sin(')">sin</button>
+          <button class="k fn" onclick="cadd('Math.cos(')">cos</button>
+          <button class="k fn" onclick="cadd('Math.tan(')">tan</button>
+          <button class="k fn" onclick="cadd('Math.asin(')">sin⁻¹</button>
+          <button class="k fn" onclick="cadd('Math.acos(')">cos⁻¹</button>
+          <button class="k fn" onclick="cadd('Math.atan(')">tan⁻¹</button>
+          <button class="k fn" onclick="cadd('Math.sinh(')">sinh</button>
+          <button class="k fn" onclick="cadd('Math.cosh(')">cosh</button>
+          <button class="k fn" onclick="cadd('Math.tanh(')">tanh</button>
+
+          <button class="k fn" onclick="cadd('Math.log10(')">log</button>
+          <button class="k fn" onclick="cadd('Math.log(')">ln</button>
+          <button class="k fn" onclick="cadd('Math.log2(')">log₂</button>
+          <button class="k fn" onclick="cadd('10**')">10ˣ</button>
+          <button class="k fn" onclick="cadd('Math.E**')">eˣ</button>
+          <button class="k fn" onclick="cadd('Math.sqrt(')">√</button>
+          <button class="k fn" onclick="cadd('Math.cbrt(')">∛</button>
+          <button class="k fn" onclick="cadd('**2')">x²</button>
+          <button class="k fn" onclick="cadd('**3')">x³</button>
+
+          <button class="k fn" onclick="cadd('Math.abs(')">|x|</button>
+          <button class="k fn" onclick="cadd('Math.ceil(')">⌈⌉</button>
+          <button class="k fn" onclick="cadd('Math.floor(')">⌊⌋</button>
+          <button class="k fn" onclick="cadd('Math.round(')">rnd</button>
+          <button class="k fn" onclick="cadd('Math.sign(')">sgn</button>
+          <button class="k fn" onclick="cadd('Math.hypot(')">hyp</button>
+          <button class="k fn" onclick="cadd('%')">mod</button>
+          <button class="k action" onclick="calcBackspace()">⌫</button>
+          <button class="k enter"  onclick="calculate()">=</button>
+        </div>
+
+        <!-- Constants -->
+        <div class="kb-grid" id="ckg-const">
+          <button class="k fn" onclick="cadd('Math.PI')">π<span class="sub">3.14159</span></button>
+          <button class="k fn" onclick="cadd('Math.E')">e<span class="sub">2.71828</span></button>
+          <button class="k fn" onclick="cadd('Math.SQRT2')">√2<span class="sub">1.41421</span></button>
+          <button class="k fn" onclick="cadd('Math.LN2')">ln2<span class="sub">0.69315</span></button>
+          <button class="k fn" onclick="cadd('Math.LN10')">ln10<span class="sub">2.30259</span></button>
+          <button class="k fn" onclick="cadd('(1+Math.sqrt(5))/2')">φ<span class="sub">golden</span></button>
+          <button class="k fn" onclick="cadd('(1/Math.sqrt(2*Math.PI))')">1/√2π</button>
+          <button class="k action" onclick="calcBackspace()">⌫</button>
+          <button class="k action" onclick="calcClear()">AC</button>
+
+          <button class="k num" onclick="cadd('7')">7</button>
+          <button class="k num" onclick="cadd('8')">8</button>
+          <button class="k num" onclick="cadd('9')">9</button>
+          <button class="k op"  onclick="cadd('/')">÷</button>
+          <button class="k fn"  onclick="cadd('(')"> ( </button>
+          <button class="k fn"  onclick="cadd(')')"> ) </button>
+          <button class="k fn"  onclick="cadd('**')">xⁿ</button>
+          <button class="k op"  onclick="cadd('+')">+</button>
+          <button class="k enter" onclick="calculate()">=</button>
+
+          <button class="k num" onclick="cadd('4')">4</button>
+          <button class="k num" onclick="cadd('5')">5</button>
+          <button class="k num" onclick="cadd('6')">6</button>
+          <button class="k op"  onclick="cadd('*')">×</button>
+          <button class="k num" onclick="cadd('1')">1</button>
+          <button class="k num" onclick="cadd('2')">2</button>
+          <button class="k num" onclick="cadd('3')">3</button>
+          <button class="k op"  onclick="cadd('-')">−</button>
+          <button class="k enter" onclick="calculate()">=</button>
+
+          <button class="k num" style="grid-column:span 2" onclick="cadd('0')">0</button>
+          <button class="k num" onclick="cadd('.')">.</button>
+          <button class="k fn"  onclick="calcAns()">ANS</button>
+          <button class="k fn"  onclick="cadd('Math.log10(')">log</button>
+          <button class="k fn"  onclick="cadd('Math.sqrt(')">√</button>
+          <button class="k fn"  onclick="cadd('%')">%</button>
+          <button class="k action" onclick="calcBackspace()">⌫</button>
+          <button class="k enter"  onclick="calculate()">=</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ══════════════ PDF PAGE ══════════════ -->
   <div class="page" id="pdfPage">
     <button class="back-btn" onclick="showPage('homePage')">← Back</button>
-    <div class="badge">Free · No API Key · Runs Locally</div>
+    <div class="badge">Free · No API Key</div>
     <h1>PDF <span>Field</span><br/>Changer</h1>
     <p class="subtitle">Upload your PDF — Name, PRN, Batch and Class are detected automatically.</p>
 
@@ -420,11 +647,7 @@
 
 </div>
 <script>
-  // ── CONFIG ────────────────────────────────────────────────────────────────
-  // 👇 Paste your Cloudflare Worker URL here after deploying worker.js
   const WORKER_URL  = "https://late-dew-3332.oknlogintnissan.workers.dev";
-
-  // 👇 Your Render backend URL for PDF editing
   const BACKEND_URL = "https://pdf-name-editor.onrender.com";
 
   // ── NAVIGATION ────────────────────────────────────────────────────────────
@@ -434,181 +657,269 @@
     window.scrollTo(0,0);
   }
 
-  // ── MATH KEYBOARD ─────────────────────────────────────────────────────────
-  function toggleKeyboard() {
-    const kb  = document.getElementById('mathKeyboard');
+  // ── iOS KEYBOARD (solver) ─────────────────────────────────────────────────
+  function toggleKB() {
+    const kb  = document.getElementById('iosKB');
     const btn = document.getElementById('kbToggle');
     kb.classList.toggle('open');
     btn.classList.toggle('open');
     btn.innerHTML = kb.classList.contains('open') ? '⌨️ &nbsp;Hide Keyboard' : '⌨️ &nbsp;Math Keyboard';
   }
 
+  function switchKBTab(tab) {
+    ['num','func','greek','calc'].forEach(t => {
+      document.getElementById('kbt-'+t)?.classList.toggle('active', t===tab);
+      document.getElementById('kbg-'+t)?.classList.toggle('active', t===tab);
+    });
+  }
+
   function ins(val) {
     const ta    = document.getElementById('mathQuestion');
     const start = ta.selectionStart, end = ta.selectionEnd;
-    ta.value    = ta.value.substring(0, start) + val + ta.value.substring(end);
+    ta.value    = ta.value.substring(0,start) + val + ta.value.substring(end);
     ta.selectionStart = ta.selectionEnd = start + val.length;
     ta.focus();
   }
 
-  function backspace() {
+  function kbBackspace() {
     const ta    = document.getElementById('mathQuestion');
     const start = ta.selectionStart, end = ta.selectionEnd;
-    if (start === end && start > 0) {
-      ta.value = ta.value.substring(0, start-1) + ta.value.substring(end);
-      ta.selectionStart = ta.selectionEnd = start - 1;
-    } else if (start !== end) {
-      ta.value = ta.value.substring(0, start) + ta.value.substring(end);
+    if (start===end && start>0) {
+      ta.value = ta.value.substring(0,start-1) + ta.value.substring(end);
+      ta.selectionStart = ta.selectionEnd = start-1;
+    } else if (start!==end) {
+      ta.value = ta.value.substring(0,start) + ta.value.substring(end);
       ta.selectionStart = ta.selectionEnd = start;
     }
     ta.focus();
-  }
-
-  function clearAll() {
-    if (confirm('Clear everything?')) {
-      document.getElementById('mathQuestion').value = '';
-      document.getElementById('mathQuestion').focus();
-    }
   }
 
   // ── MATH TABS ─────────────────────────────────────────────────────────────
   let activeTab = 'text';
   function switchTab(tab) {
     activeTab = tab;
-    document.getElementById('tabText').classList.toggle('active',  tab === 'text');
-    document.getElementById('tabImage').classList.toggle('active', tab === 'image');
-    document.getElementById('textInput').style.display  = tab === 'text'  ? 'block' : 'none';
-    document.getElementById('imageInput').style.display = tab === 'image' ? 'block' : 'none';
+    document.getElementById('tabText').classList.toggle('active',  tab==='text');
+    document.getElementById('tabImage').classList.toggle('active', tab==='image');
+    document.getElementById('textInput').style.display  = tab==='text'  ? 'block' : 'none';
+    document.getElementById('imageInput').style.display = tab==='image' ? 'block' : 'none';
     document.getElementById('answerBox').style.display  = 'none';
   }
 
   // ── IMAGE UPLOAD ──────────────────────────────────────────────────────────
-  let mathImageBase64 = null, mathImageMime = null;
-  document.getElementById('mathImgInput').addEventListener('change', e => {
-    if (e.target.files[0]) loadImage(e.target.files[0]);
+  let mathImageBase64=null, mathImageMime=null;
+  document.getElementById('mathImgInput').addEventListener('change', e=>{
+    if(e.target.files[0]) loadImage(e.target.files[0]);
   });
-  const imgDrop = document.getElementById('imgDrop');
-  imgDrop.addEventListener('dragover',  e => { e.preventDefault(); imgDrop.classList.add('drag-over'); });
-  imgDrop.addEventListener('dragleave', () => imgDrop.classList.remove('drag-over'));
-  imgDrop.addEventListener('drop', e => {
-    e.preventDefault(); imgDrop.classList.remove('drag-over');
-    if (e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
+  const imgDrop=document.getElementById('imgDrop');
+  imgDrop.addEventListener('dragover', e=>{e.preventDefault();imgDrop.classList.add('drag-over')});
+  imgDrop.addEventListener('dragleave',()=>imgDrop.classList.remove('drag-over'));
+  imgDrop.addEventListener('drop', e=>{
+    e.preventDefault();imgDrop.classList.remove('drag-over');
+    if(e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
   });
-
-  function loadImage(file) {
-    mathImageMime = file.type;
-    const reader  = new FileReader();
-    reader.onload = e => {
-      mathImageBase64 = e.target.result.split(',')[1];
-      const prev = document.getElementById('imgPreview');
-      prev.src   = e.target.result;
-      prev.style.display = 'block';
+  function loadImage(file){
+    mathImageMime=file.type;
+    const r=new FileReader();
+    r.onload=e=>{
+      mathImageBase64=e.target.result.split(',')[1];
+      const p=document.getElementById('imgPreview');
+      p.src=e.target.result;p.style.display='block';
     };
-    reader.readAsDataURL(file);
+    r.readAsDataURL(file);
   }
 
-  // ── SOLVE (calls Cloudflare Worker — API key is safe on server) ───────────
-  document.getElementById('solveBtn').addEventListener('click', async () => {
-    const solveBtn   = document.getElementById('solveBtn');
-    const mathLoader = document.getElementById('mathLoader');
-    const answerBox  = document.getElementById('answerBox');
-    const answerText = document.getElementById('answerText');
-
-    let body = {};
-
-    if (activeTab === 'text') {
-      const q = document.getElementById('mathQuestion').value.trim();
-      if (!q) { alert('Please type a question first!'); return; }
-      body = { question: q, type: 'text' };
+  // ── SOLVE ─────────────────────────────────────────────────────────────────
+  document.getElementById('solveBtn').addEventListener('click', async()=>{
+    const solveBtn=document.getElementById('solveBtn');
+    const mathLoader=document.getElementById('mathLoader');
+    const answerBox=document.getElementById('answerBox');
+    const answerText=document.getElementById('answerText');
+    let body={};
+    if(activeTab==='text'){
+      const q=document.getElementById('mathQuestion').value.trim();
+      if(!q){alert('Please type a question first!');return;}
+      body={question:q,type:'text'};
     } else {
-      if (!mathImageBase64) { alert('Please upload an image first!'); return; }
-      body = { image: mathImageBase64, mime: mathImageMime, type: 'image' };
+      if(!mathImageBase64){alert('Please upload an image first!');return;}
+      body={image:mathImageBase64,mime:mathImageMime,type:'image'};
     }
+    solveBtn.disabled=true;solveBtn.textContent='Solving…';
+    mathLoader.style.display='block';answerBox.style.display='none';
+    try{
+      const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const data=await res.json();
+      if(data.error) throw new Error(data.error);
+      answerText.innerHTML=data.answer.replace(/\n/g,'<br>');
+      answerBox.style.display='block';
+    }catch(err){
+      answerText.innerHTML='❌ Error: '+err.message;
+      answerBox.style.display='block';
+    }finally{
+      mathLoader.style.display='none';
+      solveBtn.disabled=false;
+      solveBtn.innerHTML='🧮 &nbsp;Solve Now';
+    }
+  });
 
-    solveBtn.disabled        = true;
-    solveBtn.textContent     = 'Solving…';
-    mathLoader.style.display = 'block';
-    answerBox.style.display  = 'none';
+  // ── CALCULATOR ────────────────────────────────────────────────────────────
+  let calcExpr='', calcLastAns=0, calcDeg=false;
+  const calcExprEl=document.getElementById('calcExpr');
+  const calcResultEl=document.getElementById('calcResult');
+  const calcPreviewEl=document.getElementById('calcPreviewLine');
+  const calcHistEl=document.getElementById('calcHistory');
 
-    try {
-      const res  = await fetch(WORKER_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(body)
-      });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      answerText.textContent  = data.answer;
-      answerBox.style.display = 'block';
-    } catch (err) {
-      answerText.textContent  = '❌ Error: ' + err.message;
-      answerBox.style.display = 'block';
-    } finally {
-      mathLoader.style.display = 'none';
-      solveBtn.disabled        = false;
-      solveBtn.innerHTML       = '🧮 &nbsp;Solve Now';
+  function switchCalcTab(tab){
+    ['num','sci','const'].forEach(t=>{
+      document.getElementById('ckt-'+t)?.classList.toggle('active',t===tab);
+      document.getElementById('ckg-'+t)?.classList.toggle('active',t===tab);
+    });
+  }
+
+  function cadd(val){
+    if(val==='+/-'){
+      if(calcExpr.startsWith('-')) calcExpr=calcExpr.slice(1);
+      else calcExpr='-'+calcExpr;
+    } else {
+      calcExpr+=val;
+    }
+    updateCalcDisplay();
+  }
+
+  function calcBackspace(){
+    calcExpr=calcExpr.slice(0,-1);
+    updateCalcDisplay();
+  }
+
+  function calcClear(){
+    calcExpr='';
+    calcExprEl.textContent='';
+    calcResultEl.textContent='0';
+    calcPreviewEl.textContent='';
+  }
+
+  function calcAns(){
+    calcExpr+=calcLastAns;
+    updateCalcDisplay();
+  }
+
+  function toggleCalcDeg(){
+    calcDeg=!calcDeg;
+    document.getElementById('degBtn').textContent=calcDeg?'RAD':'DEG';
+  }
+
+  function updateCalcDisplay(){
+    calcExprEl.textContent=calcExpr;
+    try{
+      let expr=calcExpr;
+      if(calcDeg){
+        expr=expr
+          .replace(/Math\.sin\(/g,'Math.sin(Math.PI/180*')
+          .replace(/Math\.cos\(/g,'Math.cos(Math.PI/180*')
+          .replace(/Math\.tan\(/g,'Math.tan(Math.PI/180*');
+      }
+      const result=eval(expr);
+      if(result!==undefined && calcExpr!==''){
+        calcPreviewEl.textContent='= '+parseFloat(result.toFixed(10));
+      } else {
+        calcPreviewEl.textContent='';
+      }
+    }catch{
+      calcPreviewEl.textContent='';
+    }
+  }
+
+  function calculate(){
+    if(!calcExpr) return;
+    try{
+      let expr=calcExpr;
+      if(calcDeg){
+        expr=expr
+          .replace(/Math\.sin\(/g,'Math.sin(Math.PI/180*')
+          .replace(/Math\.cos\(/g,'Math.cos(Math.PI/180*')
+          .replace(/Math\.tan\(/g,'Math.tan(Math.PI/180*');
+      }
+      const result=eval(expr);
+      const formatted=parseFloat(result.toFixed(10));
+      // Add to history
+      const item=document.createElement('div');
+      item.textContent=calcExpr+' = '+formatted;
+      calcHistEl.prepend(item);
+      calcLastAns=result;
+      calcResultEl.textContent=formatted;
+      calcExprEl.textContent=calcExpr+' =';
+      calcPreviewEl.textContent='';
+      calcExpr='';
+    }catch{
+      calcResultEl.textContent='Error';
+      setTimeout(()=>{calcResultEl.textContent='0';calcClear();},1000);
+    }
+  }
+
+  // Keyboard support
+  document.addEventListener('keydown', e=>{
+    if(document.getElementById('calcPage').classList.contains('active')){
+      if('0123456789+-*/.()'.includes(e.key)) cadd(e.key);
+      if(e.key==='Enter'){e.preventDefault();calculate();}
+      if(e.key==='Backspace'){e.preventDefault();calcBackspace();}
+      if(e.key==='Escape') calcClear();
     }
   });
 
   // ── PDF EDITOR ────────────────────────────────────────────────────────────
-  const pdfInput      = document.getElementById('pdfInput');
-  const dropZone      = document.getElementById('dropZone');
-  const fileName      = document.getElementById('fileName');
-  const detectBtn     = document.getElementById('detectBtn');
-  const pdfLoader     = document.getElementById('pdfLoader');
-  const fieldsCard    = document.getElementById('fieldsCard');
-  const fieldsGrid    = document.getElementById('fieldsGrid');
-  const fieldCount    = document.getElementById('fieldCount');
-  const replaceBtn    = document.getElementById('replaceBtn');
-  const replaceStatus = document.getElementById('replaceStatus');
-  let detectedFields  = [], uploadedFile = null;
+  const pdfInput=document.getElementById('pdfInput');
+  const dropZone=document.getElementById('dropZone');
+  const fileName=document.getElementById('fileName');
+  const detectBtn=document.getElementById('detectBtn');
+  const pdfLoader=document.getElementById('pdfLoader');
+  const fieldsCard=document.getElementById('fieldsCard');
+  const fieldsGrid=document.getElementById('fieldsGrid');
+  const fieldCount=document.getElementById('fieldCount');
+  const replaceBtn=document.getElementById('replaceBtn');
+  const replaceStatus=document.getElementById('replaceStatus');
+  let detectedFields=[],uploadedFile=null;
 
-  pdfInput.addEventListener('change', () => { if (pdfInput.files[0]) onFile(pdfInput.files[0]); });
-  dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
-  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
-  dropZone.addEventListener('drop', e => {
-    e.preventDefault(); dropZone.classList.remove('drag-over');
-    if (e.dataTransfer.files[0]) onFile(e.dataTransfer.files[0]);
+  pdfInput.addEventListener('change',()=>{if(pdfInput.files[0])onFile(pdfInput.files[0])});
+  dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.classList.add('drag-over')});
+  dropZone.addEventListener('dragleave',()=>dropZone.classList.remove('drag-over'));
+  dropZone.addEventListener('drop',e=>{
+    e.preventDefault();dropZone.classList.remove('drag-over');
+    if(e.dataTransfer.files[0])onFile(e.dataTransfer.files[0]);
   });
 
-  function onFile(file) {
-    if (!file.name.endsWith('.pdf')) { alert('Please upload a PDF.'); return; }
-    uploadedFile = file;
-    fileName.textContent        = '📎 ' + file.name;
-    fileName.style.display      = 'block';
-    detectBtn.disabled          = false;
-    fieldsCard.style.display    = 'none';
-    replaceStatus.style.display = 'none';
+  function onFile(file){
+    if(!file.name.endsWith('.pdf')){alert('Please upload a PDF.');return;}
+    uploadedFile=file;
+    fileName.textContent='📎 '+file.name;
+    fileName.style.display='block';
+    detectBtn.disabled=false;
+    fieldsCard.style.display='none';
+    replaceStatus.style.display='none';
   }
 
-  detectBtn.addEventListener('click', async () => {
-    if (!uploadedFile) return;
-    detectBtn.disabled       = true;
-    pdfLoader.style.display  = 'block';
-    fieldsCard.style.display = 'none';
-    const fd = new FormData();
-    fd.append('pdf', uploadedFile);
-    try {
-      const res  = await fetch(`${BACKEND_URL}/api/detect`, { method: 'POST', body: fd });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      detectedFields = data.fields || [];
-      renderFields(detectedFields);
-    } catch (err) { alert('Error: ' + err.message); }
-    finally { pdfLoader.style.display = 'none'; detectBtn.disabled = false; }
+  detectBtn.addEventListener('click',async()=>{
+    if(!uploadedFile)return;
+    detectBtn.disabled=true;pdfLoader.style.display='block';fieldsCard.style.display='none';
+    const fd=new FormData();fd.append('pdf',uploadedFile);
+    try{
+      const res=await fetch(`${BACKEND_URL}/api/detect`,{method:'POST',body:fd});
+      const data=await res.json();
+      if(data.error)throw new Error(data.error);
+      detectedFields=data.fields||[];renderFields(detectedFields);
+    }catch(err){alert('Error: '+err.message);}
+    finally{pdfLoader.style.display='none';detectBtn.disabled=false;}
   });
 
-  function renderFields(fields) {
-    fieldsGrid.innerHTML = '';
-    fieldCount.textContent = fields.length + ' field' + (fields.length !== 1 ? 's' : '') + ' found';
-    if (!fields.length) {
-      fieldsGrid.innerHTML = '<div class="empty">No fields detected. Make sure your PDF has Name, PRN, Batch or Class labels.</div>';
+  function renderFields(fields){
+    fieldsGrid.innerHTML='';
+    fieldCount.textContent=fields.length+' field'+(fields.length!==1?'s':'')+' found';
+    if(!fields.length){
+      fieldsGrid.innerHTML='<div class="empty">No fields detected.</div>';
     } else {
-      fields.forEach((f, i) => {
-        const row = document.createElement('div');
-        row.className = 'field-row';
-        row.style.animationDelay = (i * 60) + 'ms';
-        row.innerHTML = `
+      fields.forEach((f,i)=>{
+        const row=document.createElement('div');
+        row.className='field-row';
+        row.style.animationDelay=(i*60)+'ms';
+        row.innerHTML=`
           <div>
             <div class="field-name">${f.field}</div>
             <div class="field-old">Current: <span>${f.value}</span></div>
@@ -620,46 +931,38 @@
         fieldsGrid.appendChild(row);
       });
     }
-    fieldsCard.style.display = 'block';
+    fieldsCard.style.display='block';
   }
 
-  replaceBtn.addEventListener('click', async () => {
-    if (!uploadedFile || !detectedFields.length) return;
-    const inputs = fieldsGrid.querySelectorAll('input[data-index]');
-    const replacements = [];
-    inputs.forEach(inp => {
-      const val = inp.value.trim();
-      if (!val) return;
-      const f = detectedFields[parseInt(inp.dataset.index)];
-      replacements.push({ label: f.label, format: f.format, word_count: f.word_count, new_value: val });
+  replaceBtn.addEventListener('click',async()=>{
+    if(!uploadedFile||!detectedFields.length)return;
+    const inputs=fieldsGrid.querySelectorAll('input[data-index]');
+    const replacements=[];
+    inputs.forEach(inp=>{
+      const val=inp.value.trim();if(!val)return;
+      const f=detectedFields[parseInt(inp.dataset.index)];
+      replacements.push({label:f.label,format:f.format,word_count:f.word_count,new_value:val});
     });
-    if (!replacements.length) { showStatus('error', 'Please enter at least one new value.'); return; }
-    replaceBtn.disabled         = true;
-    replaceBtn.textContent      = 'Processing…';
-    replaceStatus.style.display = 'none';
-    const fd = new FormData();
-    fd.append('pdf', uploadedFile);
-    fd.append('replacements', JSON.stringify(replacements));
-    try {
-      const res = await fetch(`${BACKEND_URL}/api/replace`, { method: 'POST', body: fd });
-      if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Unknown error'); }
-      const blob = await res.blob();
-      const url  = URL.createObjectURL(blob);
-      const a    = document.createElement('a');
-      a.href = url; a.download = 'modified_' + uploadedFile.name; a.click();
+    if(!replacements.length){showStatus('error','Please enter at least one new value.');return;}
+    replaceBtn.disabled=true;replaceBtn.textContent='Processing…';replaceStatus.style.display='none';
+    const fd=new FormData();fd.append('pdf',uploadedFile);fd.append('replacements',JSON.stringify(replacements));
+    try{
+      const res=await fetch(`${BACKEND_URL}/api/replace`,{method:'POST',body:fd});
+      if(!res.ok){const e=await res.json();throw new Error(e.error||'Unknown error');}
+      const blob=await res.blob();
+      const url=URL.createObjectURL(blob);
+      const a=document.createElement('a');
+      a.href=url;a.download='modified_'+uploadedFile.name;a.click();
       URL.revokeObjectURL(url);
-      showStatus('success', '✓ PDF modified and downloaded!');
-    } catch (err) { showStatus('error', 'Error: ' + err.message); }
-    finally {
-      replaceBtn.disabled  = false;
-      replaceBtn.innerHTML = '✏️ &nbsp;Apply Changes &amp; Download PDF';
-    }
+      showStatus('success','✓ PDF modified and downloaded!');
+    }catch(err){showStatus('error','Error: '+err.message);}
+    finally{replaceBtn.disabled=false;replaceBtn.innerHTML='✏️ &nbsp;Apply Changes &amp; Download PDF';}
   });
 
-  function showStatus(type, msg) {
-    replaceStatus.className     = 'status ' + type;
-    replaceStatus.textContent   = msg;
-    replaceStatus.style.display = 'block';
+  function showStatus(type,msg){
+    replaceStatus.className='status '+type;
+    replaceStatus.textContent=msg;
+    replaceStatus.style.display='block';
   }
 </script>
 </body>
