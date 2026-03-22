@@ -210,6 +210,13 @@
     .calc-history{max-height:100px;overflow-y:auto;margin-bottom:12px;font-size:12px;color:var(--muted)}
     .calc-history div{padding:4px 0;border-bottom:1px solid var(--border)}
   </style>
+  <script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
 <div class="wrap">
