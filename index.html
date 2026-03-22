@@ -768,7 +768,8 @@ MathJax = {
       const res=await fetch(WORKER_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
       const data=await res.json();
       if(data.error) throw new Error(data.error);
-      answerText.innerHTML=data.answer.replace(/\n/g,'<br>');
+      answerText.innerHTML = data.answer.replace(/\n/g,'<br>');
+if(window.MathJax) MathJax.typesetPromise([answerText]);
       answerBox.style.display='block';
     }catch(err){
       answerText.innerHTML='❌ Error: '+err.message;
