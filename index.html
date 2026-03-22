@@ -718,16 +718,28 @@
     if(e.dataTransfer.files[0]) loadImage(e.dataTransfer.files[0]);
   });
   function loadImage(file){
-    mathImageMime=file.type;
-    const r=new FileReader();
-    r.onload=e=>{
-      mathImageBase64=e.target.result.split(',')[1];
-      const p=document.getElementById('imgPreview');
-      p.src=e.target.result;p.style.display='block';
+    mathImageMime = 'image/jpeg';
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onload = e => {
+      img.src = e.target.result;
+      img.onload = () => {
+        // Resize to max 800px wide
+        const canvas = document.createElement('canvas');
+        const MAX = 800;
+        let w = img.width, h = img.height;
+        if(w > MAX){ h = Math.round(h * MAX / w); w = MAX; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        // Compress to JPEG at 70% quality
+        const compressed = canvas.toDataURL('image/jpeg', 0.7);
+        mathImageBase64 = compressed.split(',')[1];
+        const p = document.getElementById('imgPreview');
+        p.src = compressed; p.style.display = 'block';
+      };
     };
-    r.readAsDataURL(file);
+    reader.readAsDataURL(file);
   }
-
   // ── SOLVE ─────────────────────────────────────────────────────────────────
   document.getElementById('solveBtn').addEventListener('click', async()=>{
     const solveBtn=document.getElementById('solveBtn');
